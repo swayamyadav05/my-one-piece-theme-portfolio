@@ -1,0 +1,19 @@
+{
+    "name": "one-piece-portfolio",
+    "version": "1.0.0",
+    "description": "One Piece themed portfolio website with AI assistant",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js",
+      "dev": "node server.js"
+    },
+    "dependencies": {
+      "openai": "^4.0.0"
+    },
+    "engines": {
+      "node": ">=16.0.0"
+    },
+    "keywords": ["portfolio", "one-piece", "ai-assistant"],
+    "author": "Your Name",
+    "license": "MIT"
+  }
