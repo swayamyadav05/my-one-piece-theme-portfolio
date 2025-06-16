@@ -1,4 +1,4 @@
-Your One Piece portfolio website is complete! Here's what I've built for you:
+Your One Piece portfolio website is complete! Here's what I've built:
 
 ✓ Dark pirate theme with red, gold, and navy colors
 ✓ CSS-only hamburger navigation menu
@@ -12,4 +12,4 @@ Your One Piece portfolio website is complete! Here's what I've built for you:
 ✓ Footer with Luffy's famous quote
 ✓ Fully responsive design for all devices
 
-The site captures the adventurous One Piece spirit while maintaining a professional portfolio structure. How does everything look and feel? Are you ready to set sail with this portfolio?
+The site captures the adventurous One Piece spirit while maintaining a professional portfolio structure. How does everything look and feel? Are you ready to set sail with this me?
