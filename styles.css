@@ -12,8 +12,8 @@ html {
 body {
     font-family: "Open Sans", sans-serif;
     line-height: 1.6;
-    color: #ffffff;
-    background-color: #1a1a1a;
+    color: var(--text-color);
+    background-color: var(--dark-bg);
     overflow-x: hidden;
     position: relative;
 }
@@ -44,6 +44,8 @@ h6 {
     --dark-bg: #1a1a1a;
     --parchment: #f4e4bc;
     --white: #ffffff;
+    --text-color: #ffffff;
+    --text-color-secondary: #e0e0e0;
     --transition: all 0.3s ease;
 }
 
@@ -55,6 +57,8 @@ h6 {
     --dark-bg: #f5f5f5;
     --parchment: #2c2c2c;
     --white: #2c2c2c;
+    --text-color: #2c2c2c;
+    --text-color-secondary: #4a4a4a;
 }
 
 /* Floating Background Elements */
@@ -2022,4 +2026,63 @@ section {
     .contact {
         background: white;
     }
+}
+
+/* Update text colors for various elements in light mode */
+[data-theme="light"] .hero-description,
+[data-theme="light"] .about-text p,
+[data-theme="light"] .timeline-content p,
+[data-theme="light"] .cert-card p,
+[data-theme="light"] .testimonial-content p,
+[data-theme="light"] .project-content p,
+[data-theme="light"] .map-content p,
+[data-theme="light"] .contact-details p,
+[data-theme="light"] .footer-quote p {
+    color: var(--text-color-secondary);
+}
+
+[data-theme="light"] .nav-link,
+[data-theme="light"] .footer-nav a {
+    color: var(--text-color);
+}
+
+[data-theme="light"] .nav-link:hover,
+[data-theme="light"] .footer-nav a:hover {
+    color: var(--primary-red);
+}
+
+[data-theme="light"] .form-group input,
+[data-theme="light"] .form-group textarea {
+    background-color: #ffffff;
+    color: var(--text-color);
+    border: 1px solid #e0e0e0;
+}
+
+[data-theme="light"] .form-group input:focus,
+[data-theme="light"] .form-group textarea:focus {
+    border-color: var(--primary-red);
+    box-shadow: 0 0 0 2px rgba(178, 34, 34, 0.1);
+}
+
+[data-theme="light"] .form-group label {
+    color: var(--text-color);
+}
+
+[data-theme="light"] .btn {
+    color: var(--text-color);
+}
+
+[data-theme="light"] .btn-primary {
+    background-color: var(--primary-red);
+    color: #ffffff;
+}
+
+[data-theme="light"] .btn-secondary {
+    background-color: var(--navy);
+    color: #ffffff;
+}
+
+[data-theme="light"] .btn-tertiary {
+    background-color: var(--gold);
+    color: var(--text-color);
 }
