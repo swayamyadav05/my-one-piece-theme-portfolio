@@ -898,6 +898,31 @@ section {
     height: 100%;
     object-fit: cover;
     transition: var(--transition);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.main-img {
+    opacity: 1;
+    z-index: 1;
+}
+
+.hover-img {
+    opacity: 0;
+    z-index: 2;
+}
+
+.image-frame:hover .main-img {
+    opacity: 0;
+}
+
+.image-frame:hover .hover-img {
+    opacity: 1;
+}
+
+.image-frame:hover .about-img {
+    transform: scale(1.1);
 }
 
 .image-overlay {
@@ -916,6 +941,7 @@ section {
     justify-content: center;
     opacity: 0;
     transition: var(--transition);
+    z-index: 3;
 }
 
 .image-overlay i {
@@ -925,10 +951,6 @@ section {
 
 .image-frame:hover .image-overlay {
     opacity: 1;
-}
-
-.image-frame:hover .about-img {
-    transform: scale(1.1);
 }
 
 .about-subtitle {
