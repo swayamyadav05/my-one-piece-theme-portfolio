@@ -1381,52 +1381,13 @@
                 resumeBtn.addEventListener("click", (e) => {
                     e.preventDefault();
 
-                    // Create a simple resume content
-                    const resumeContent = `
-            PIRATE DEVELOPER RESUME
-            ====================
-
-            Name: Captain Code
-            Position: Full Stack Developer & Digital Pirate
-            Email: captain@pirateportfolio.com
-            Phone: +1 (555) PIRATE-1
-
-            SKILLS:
-            - JavaScript (90%)
-            - React (85%)
-            - Node.js (80%)
-            - Python (88%)
-            - Databases (75%)
-            - Cloud Services (82%)
-
-            EXPERIENCE:
-            2024 - Present: Full Stack Pirate King
-            2023: Team Captain & Lead Developer
-            2022: Cloud Navigator
-            2021: Backend Explorer
-            2020: JavaScript Master
-            2019: Journey Begins
-
-            CERTIFICATIONS:
-            - AWS Solutions Architect (2024)
-            - Google Cloud Professional (2023)
-            - Cybersecurity Specialist (2023)
-            - React Master Navigator (2022)
-
-            "I'm gonna be King of the Pirates!" - Monkey D. Luffy
-                            `.trim();
-
-                    const blob = new Blob([resumeContent], {
-                        type: "text/plain",
-                    });
-                    const url = URL.createObjectURL(blob);
+                    // Create a link to download the PDF
                     const a = document.createElement("a");
-                    a.href = url;
-                    a.download = "Pirate_Developer_Resume.txt";
+                    a.href = "New Updated Resume_Post Internship.pdf";
+                    a.download = "Swayam_Yadav_Resume.pdf";
                     document.body.appendChild(a);
                     a.click();
                     document.body.removeChild(a);
-                    URL.revokeObjectURL(url);
 
                     // Show success message
                     const btn = e.target.closest(".btn");
