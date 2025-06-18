@@ -1044,60 +1044,28 @@
 
                 <div class="contact-content">
                     <div class="contact-info">
-                        <div class="contact-item">
-                            <div class="contact-icon">
+                        <h3 class="contact-info-title">Contact Info</h3>
+                        <div class="contact-item compact">
+                            <div class="contact-icon small">
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div class="contact-details">
-                                <h3>Email</h3>
+                                <h4>Email</h4>
                                 <p>swayam.2956work@gmail.com</p>
                             </div>
                         </div>
-
-                        <div class="contact-item">
-                            <div class="contact-icon">
+                        <div class="contact-item compact">
+                            <div class="contact-icon small">
                                 <i class="fas fa-phone"></i>
                             </div>
                             <div class="contact-details">
-                                <h3>Den Den Mushi</h3>
+                                <h4>Den Den Mushi</h4>
                                 <p>+977 9811960990 / +91 9348941529</p>
-                            </div>
-                        </div>
-
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fab fa-linkedin"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h3>LinkedIn</h3>
-                                <p>
-                                    <a
-                                        href="https://www.linkedin.com/in/swayam-yadav-990900229/"
-                                        target="_blank"
-                                        >https://www.linkedin.com/in/swayam-yadav-990900229/</a
-                                    >
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fab fa-github"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h3>GitHub</h3>
-                                <p>
-                                    <a
-                                        href="https://github.com/swayamyadav05"
-                                        target="_blank"
-                                        >https://github.com/swayamyadav05</a
-                                    >
-                                </p>
                             </div>
                         </div>
                     </div>
 
-                    <form class="contact-form">
+                    <form class="contact-form" id="contact-form">
                         <div class="form-group">
                             <label for="name">Your Name</label>
                             <input type="text" id="name" name="name" required />
@@ -1197,6 +1165,8 @@
                 </div>
             </div>
         </footer>
+
+        <div id="toast-message" class="custom-toast"></div>
 
         <script>
             // Typing Animation
@@ -1490,6 +1460,45 @@
                     egg.style.left = Math.random() * 90 + 5 + "%";
                 });
             });
+        </script>
+        <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+        <script>
+            (function () {
+                emailjs.init("3xGPdkWIKgZbgcqum");
+            })();
+
+            function showToast(message, type = "success") {
+                const toast = document.getElementById("toast-message");
+                toast.textContent = message;
+                toast.className = `custom-toast show ${type}`;
+                setTimeout(() => {
+                    toast.className = "custom-toast";
+                }, 3000);
+            }
+
+            document
+                .getElementById("contact-form")
+                .addEventListener("submit", function (e) {
+                    e.preventDefault();
+                    emailjs
+                        .sendForm("service_s3mcqlr", "template_5fazbpq", this)
+                        .then(
+                            function () {
+                                showToast(
+                                    "Message sent successfully!",
+                                    "success"
+                                );
+                                document.getElementById("contact-form").reset();
+                            },
+                            function (error) {
+                                showToast(
+                                    "Failed to send message. Please try again later.",
+                                    "error"
+                                );
+                                console.log("FAILED...", error);
+                            }
+                        );
+                });
         </script>
         <script src="ai-assistant.js"></script>
     </body>

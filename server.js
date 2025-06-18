@@ -3,6 +3,7 @@ const http = require("http");
 const url = require("url");
 const path = require("path");
 const fs = require("fs");
+require("dotenv").config();
 
 // Simple HTTP server to serve static files and handle API requests
 const server = http.createServer(async (req, res) => {
@@ -100,41 +101,40 @@ const server = http.createServer(async (req, res) => {
     });
 });
 
-// AI Response function using OpenAI
+// AI Response function using OpenRouter
 async function getAIResponse(userMessage, context) {
-    const apiKey = process.env.OPENAI_API_KEY;
+    const apiKey = process.env.OPENROUTER_API_KEY;
 
     if (!apiKey) {
-        throw new Error("OpenAI API key not found");
+        throw new Error("OpenRouter API key not found");
     }
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${apiKey}`,
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
-            messages: [
-                {
-                    role: "system",
-                    content: context,
-                },
-                {
-                    role: "user",
-                    content: userMessage,
-                },
-            ],
-            max_tokens: 300,
-            temperature: 0.7,
-        }),
-    });
+    const response = await fetch(
+        "https://openrouter.ai/api/v1/chat/completions",
+        {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${apiKey}`,
+                "Content-Type": "application/json",
+                "HTTP-Referer": "https://swayam-pirate-portfolio.vercel.app",
+                "X-Title": "One Piece Portfolio",
+            },
+            body: JSON.stringify({
+                model: "deepseek/deepseek-r1-0528:free",
+                messages: [
+                    { role: "system", content: context },
+                    { role: "user", content: userMessage },
+                ],
+                max_tokens: 300,
+                temperature: 0.7,
+            }),
+        }
+    );
 
     if (!response.ok) {
         const errorData = await response.text();
-        console.error("OpenAI API Error:", errorData);
-        throw new Error(`OpenAI API request failed: ${response.status}`);
+        console.error("OpenRouter API Error:", errorData);
+        throw new Error(`OpenRouter API request failed: ${response.status}`);
     }
 
     const data = await response.json();
