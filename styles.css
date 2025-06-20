@@ -49,16 +49,79 @@ h6 {
     --transition: all 0.3s ease;
 }
 
-/* Light Theme Variables */
-[data-theme="light"] {
-    --primary-red: #b22222;
-    --gold: #daa520;
-    --navy: #2e4f6b;
-    --dark-bg: #f5f5f5;
-    --parchment: #2c2c2c;
-    --white: #2c2c2c;
-    --text-color: #2c2c2c;
-    --text-color-secondary: #4a4a4a;
+/* Luffy Theme - Authentic Straw Hat Colors */
+[data-theme="luffy"] {
+    --primary-red: #dc143c; /* Luffy's vest red */
+    --gold: #ffd700; /* Straw hat yellow */
+    --navy: #1b1b3a; /* His shorts blue */
+    --dark-bg: #fff8dc; /* Warm cream like straw */
+    --parchment: #f5deb3; /* Wheat color */
+    --white: #ffffff;
+    --text-color: #2f1b14; /* Deep brown */
+    --text-color-secondary: #8b4513;
+    --card-bg: #fffacd; /* Light straw */
+    --border-color: #daa520; /* Golden rod */
+    --shadow-color: rgba(220, 20, 60, 0.2);
+}
+
+/* Zoro Theme - Authentic Swordsman Colors */
+[data-theme="zoro"] {
+    --primary-red: #228b22; /* Forest green like his hair */
+    --gold: #c0c0c0; /* Silver like his swords */
+    --navy: #006400; /* Dark green */
+    --dark-bg: #0b1426; /* Very dark navy */
+    --parchment: #1c3a1c; /* Dark forest */
+    --white: #f5f5f5; /* Off white */
+    --text-color: #e6e6fa; /* Light lavender */
+    --text-color-secondary: #98fb98;
+    --card-bg: #2f4f2f; /* Dark slate gray */
+    --border-color: #32cd32; /* Lime green */
+    --shadow-color: rgba(34, 139, 34, 0.4);
+}
+
+/* Sanji Theme - Authentic Cook Colors */
+[data-theme="sanji"] {
+    --primary-red: #4169e1; /* Royal blue like his suit */
+    --gold: #ffd700; /* Gold buttons/accents */
+    --navy: #191970; /* Midnight blue */
+    --dark-bg: #0f1419; /* Very dark blue */
+    --parchment: #1c2951; /* Dark blue gray */
+    --white: #f8f8ff; /* Ghost white */
+    --text-color: #f0f8ff; /* Alice blue */
+    --text-color-secondary: #b0c4de;
+    --card-bg: #2f4f8f; /* Dark slate blue */
+    --border-color: #4682b4; /* Steel blue */
+    --shadow-color: rgba(65, 105, 225, 0.3);
+}
+
+/* Nami Theme - Authentic Navigator Colors */
+[data-theme="nami"] {
+    --primary-red: #ff8c00; /* Dark orange like her hair */
+    --gold: #ffd700; /* Gold jewelry */
+    --navy: #ff6347; /* Tomato red */
+    --dark-bg: #fff8f0; /* Floral white */
+    --parchment: #ffefd5; /* Papaya whip */
+    --white: #ffffff;
+    --text-color: #8b4513; /* Saddle brown */
+    --text-color-secondary: #a0522d;
+    --card-bg: #fffaf0; /* Floral white */
+    --border-color: #ff7f50; /* Coral */
+    --shadow-color: rgba(255, 140, 0, 0.25);
+}
+
+/* Usopp Theme - Authentic Sniper Colors */
+[data-theme="usopp"] {
+    --primary-red: #daa520; /* Goldenrod like his overalls */
+    --gold: #ffff00; /* Bright yellow */
+    --navy: #8b4513; /* Saddle brown */
+    --dark-bg: #fffef7; /* Very light yellow */
+    --parchment: #f5f5dc; /* Beige */
+    --white: #ffffff;
+    --text-color: #654321; /* Dark goldenrod */
+    --text-color-secondary: #8b7355;
+    --card-bg: #fffff0; /* Ivory */
+    --border-color: #b8860b; /* Dark goldenrod */
+    --shadow-color: rgba(218, 165, 32, 0.2);
 }
 
 /* Floating Background Elements */
@@ -564,7 +627,62 @@ h6 {
     width: 100%;
 }
 
-/* Theme Toggle Button */
+.nav-link.active {
+    color: var(--gold);
+    font-weight: 600;
+}
+
+.nav-link.active::after {
+    width: 100%;
+    background: var(--gold);
+}
+
+/* Active navigation styles for different themes */
+[data-theme="luffy"] .nav-link.active {
+    color: var(--primary-red);
+}
+
+[data-theme="luffy"] .nav-link.active::after {
+    background: var(--primary-red);
+}
+
+[data-theme="zoro"] .nav-link.active {
+    color: var(--gold);
+}
+
+[data-theme="zoro"] .nav-link.active::after {
+    background: var(--primary-red);
+}
+
+[data-theme="sanji"] .nav-link.active {
+    color: var(--gold);
+}
+
+[data-theme="sanji"] .nav-link.active::after {
+    background: var(--gold);
+}
+
+[data-theme="nami"] .nav-link.active {
+    color: var(--primary-red);
+}
+
+[data-theme="nami"] .nav-link.active::after {
+    background: var(--primary-red);
+}
+
+[data-theme="usopp"] .nav-link.active {
+    color: var(--primary-red);
+}
+
+[data-theme="usopp"] .nav-link.active::after {
+    background: var(--primary-red);
+}
+
+/* Theme Selector */
+.theme-selector {
+    position: relative;
+}
+
 .theme-toggle {
     background: transparent;
     border: 2px solid var(--gold);
@@ -583,7 +701,59 @@ h6 {
 .theme-toggle:hover {
     background: var(--gold);
     color: var(--dark-bg);
-    transform: rotate(180deg);
+    transform: scale(1.1);
+}
+
+.theme-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--dark-bg);
+    border: 2px solid var(--gold);
+    border-radius: 12px;
+    padding: 0.5rem;
+    min-width: 150px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.theme-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(5px);
+}
+
+.theme-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: var(--transition);
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.theme-option:hover {
+    background: var(--gold);
+    color: var(--dark-bg);
+    transform: translateX(5px);
+}
+
+.theme-option.active {
+    background: var(--primary-red);
+    color: var(--white);
+}
+
+.theme-icon {
+    font-size: 1.2rem;
+    width: 20px;
+    text-align: center;
 }
 
 /* Mobile Navigation */
@@ -1315,8 +1485,8 @@ section {
 .testimonial-content p {
     font-style: italic;
     color: var(--parchment);
-    font-size: 1.1rem;
-    line-height: 1.7;
+    font-size: 1rem;
+    line-height: 1.2;
 }
 
 .testimonial-author {
@@ -2032,7 +2202,63 @@ section {
     }
 }
 
-/* Update text colors for various elements in light mode */
+/* Light Theme Component Styles */
+[data-theme="light"] {
+    background: var(--dark-bg);
+}
+
+/* Navigation */
+[data-theme="light"] .navbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+}
+
+[data-theme="light"] .nav-menu {
+    background: rgba(255, 255, 255, 0.98);
+}
+
+[data-theme="light"] .theme-toggle {
+    border-color: var(--primary-red);
+    color: var(--primary-red);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+    background: var(--primary-red);
+    color: var(--white);
+}
+
+/* Sections */
+[data-theme="light"] .hero {
+    background: linear-gradient(135deg, var(--parchment) 0%, var(--white) 100%);
+}
+
+[data-theme="light"] .about,
+[data-theme="light"] .certifications,
+[data-theme="light"] .testimonials,
+[data-theme="light"] .projects,
+[data-theme="light"] .timeline-section,
+[data-theme="light"] .map-section,
+[data-theme="light"] .contact {
+    background: var(--parchment);
+}
+
+/* Cards and Components */
+[data-theme="light"] .cert-card,
+[data-theme="light"] .testimonial-card,
+[data-theme="light"] .project-card,
+[data-theme="light"] .timeline-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+[data-theme="light"] .cert-card:hover,
+[data-theme="light"] .project-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Text Elements */
 [data-theme="light"] .hero-description,
 [data-theme="light"] .about-text p,
 [data-theme="light"] .timeline-content p,
@@ -2045,6 +2271,102 @@ section {
     color: var(--text-color-secondary);
 }
 
+[data-theme="light"] .section-title,
+[data-theme="light"] .hero-title,
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4 {
+    color: var(--text-color);
+}
+
+/* Skills and Progress Bars */
+[data-theme="light"] .skill-progress {
+    background: linear-gradient(90deg, var(--primary-red), var(--gold));
+}
+
+[data-theme="light"] .skill-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+[data-theme="light"] .skill-percentage {
+    color: var(--text-color);
+}
+
+/* Timeline Enhancements */
+[data-theme="light"] .timeline::before {
+    background: var(--primary-red);
+}
+
+[data-theme="light"] .timeline-icon {
+    background: var(--primary-red);
+    color: var(--white);
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 3px var(--primary-red);
+}
+
+/* Floating Elements */
+[data-theme="light"] .floating-ship,
+[data-theme="light"] .floating-treasure,
+[data-theme="light"] .floating-compass {
+    opacity: 0.05;
+    color: var(--primary-red);
+}
+
+/* Footer */
+[data-theme="light"] .footer {
+    background: var(--text-color);
+    color: var(--white);
+}
+
+[data-theme="light"] .footer-social a {
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .footer-social a:hover {
+    background: var(--primary-red);
+    color: var(--white);
+}
+
+/* Buttons */
+[data-theme="light"] .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--shadow-color);
+}
+
+/* Contact Form */
+[data-theme="light"] .contact-form {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 24px var(--shadow-color);
+}
+
+/* Map Section */
+[data-theme="light"] .map-container {
+    border: 2px solid var(--border-color);
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+/* Toast Messages */
+[data-theme="light"] .custom-toast {
+    background: linear-gradient(45deg, var(--primary-red), var(--navy));
+    color: var(--white);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] .custom-toast.success {
+    background: linear-gradient(45deg, var(--navy), var(--gold));
+    color: var(--white);
+}
+
+[data-theme="light"] .custom-toast.error {
+    background: linear-gradient(45deg, var(--primary-red), #c62828);
+    color: var(--white);
+}
+
 [data-theme="light"] .nav-link,
 [data-theme="light"] .footer-nav a {
     color: var(--text-color);
@@ -2053,6 +2375,21 @@ section {
 [data-theme="light"] .nav-link:hover,
 [data-theme="light"] .footer-nav a:hover {
     color: var(--primary-red);
+    background: rgba(211, 47, 47, 0.1);
+}
+
+/* Logo styling for light theme */
+[data-theme="light"] .logo-monogram {
+    background: linear-gradient(45deg, var(--primary-red), var(--navy));
+    color: var(--white);
+}
+
+[data-theme="light"] .logo-title {
+    color: var(--text-color);
+}
+
+[data-theme="light"] .logo-subtitle {
+    color: var(--text-color-secondary);
 }
 
 [data-theme="light"] .form-group input,

@@ -90,14 +90,40 @@
                     <li><a href="#timeline" class="nav-link">Journey</a></li>
                     <li><a href="#map" class="nav-link">Location</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
-                    <li>
+                    <li class="theme-selector">
                         <button
                             id="theme-toggle"
                             class="theme-toggle"
-                            title="Toggle Theme"
+                            title="Choose Theme"
                         >
-                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-palette"></i>
                         </button>
+                        <div class="theme-dropdown" id="theme-dropdown">
+                            <div class="theme-option" data-theme="dark">
+                                <span class="theme-icon">🏴‍☠️</span>
+                                <span>Dark Pirate</span>
+                            </div>
+                            <div class="theme-option" data-theme="luffy">
+                                <span class="theme-icon">👒</span>
+                                <span>Luffy</span>
+                            </div>
+                            <div class="theme-option" data-theme="zoro">
+                                <span class="theme-icon">⚔️</span>
+                                <span>Zoro</span>
+                            </div>
+                            <div class="theme-option" data-theme="sanji">
+                                <span class="theme-icon">🚬</span>
+                                <span>Sanji</span>
+                            </div>
+                            <div class="theme-option" data-theme="nami">
+                                <span class="theme-icon">🍊</span>
+                                <span>Nami</span>
+                            </div>
+                            <div class="theme-option" data-theme="usopp">
+                                <span class="theme-icon">🎯</span>
+                                <span>Usopp</span>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -347,9 +373,16 @@
                         <div class="testimonial-content">
                             <i class="fas fa-quote-left quote-icon"></i>
                             <p>
-                                "Working with this developer is like having Nami
-                                navigate your project - precise, strategic, and
-                                always finding the best route to success!"
+                                "I had the pleasure of working with Swayam
+                                Yadav, who served as a senior intern during my
+                                time on the CivicSight project. He played an
+                                important role in ensuring my onboarding process
+                                was seamless. Swayam’s calm demeanor, friendly
+                                nature, and approachable attitude made it easy
+                                to reach out whenever I faced challenges. He was
+                                always patient and thorough in addressing my
+                                doubts, which made the overall experience both
+                                comfortable and collaborative."
                             </p>
                         </div>
                         <div class="testimonial-author">
@@ -357,8 +390,11 @@
                                 <i class="fas fa-user-tie"></i>
                             </div>
                             <div class="author-info">
-                                <h4>Captain Sarah Johnson</h4>
-                                <span>Tech Lead, Digital Ventures</span>
+                                <h4>Chetan P</h4>
+                                <span
+                                    >SDE Intern, SkillRank(CivicSight
+                                    Project)</span
+                                >
                             </div>
                         </div>
                     </div>
@@ -1286,27 +1322,81 @@
                 });
             }
 
-            // Theme Toggle
+            // Theme Configuration - Easy On/Off Control
+            const THEME_CONFIG = {
+                luffy: false, // Straw Hat Captain theme
+                zoro: false, // Swordsman theme
+                sanji: false, // Cook theme
+                nami: false, // Navigator theme
+                usopp: false, // Sniper theme
+            };
+
+            // Theme Selector
             function initThemeToggle() {
                 const themeToggle = document.getElementById("theme-toggle");
+                const themeDropdown = document.getElementById("theme-dropdown");
+                const allThemeOptions =
+                    document.querySelectorAll(".theme-option");
                 const body = document.body;
-                const icon = themeToggle.querySelector("i");
+
+                // Hide disabled themes
+                allThemeOptions.forEach((option) => {
+                    const theme = option.getAttribute("data-theme");
+                    if (theme !== "dark" && THEME_CONFIG[theme] === false) {
+                        option.style.display = "none";
+                    }
+                });
+
+                // Get only visible theme options
+                const themeOptions = document.querySelectorAll(
+                    ".theme-option:not([style*='display: none'])"
+                );
 
                 // Check for saved theme preference
                 const savedTheme = localStorage.getItem("theme") || "dark";
                 body.setAttribute("data-theme", savedTheme);
-                icon.className =
-                    savedTheme === "dark" ? "fas fa-sun" : "fas fa-moon";
 
-                themeToggle.addEventListener("click", () => {
-                    const currentTheme = body.getAttribute("data-theme");
-                    const newTheme = currentTheme === "dark" ? "light" : "dark";
+                // Update active theme option
+                updateActiveTheme(savedTheme);
 
-                    body.setAttribute("data-theme", newTheme);
-                    localStorage.setItem("theme", newTheme);
-                    icon.className =
-                        newTheme === "dark" ? "fas fa-sun" : "fas fa-moon";
+                // Toggle dropdown
+                themeToggle.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    themeDropdown.classList.toggle("show");
                 });
+
+                // Close dropdown when clicking outside
+                document.addEventListener("click", () => {
+                    themeDropdown.classList.remove("show");
+                });
+
+                // Handle theme selection
+                themeOptions.forEach((option) => {
+                    option.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        const selectedTheme = option.getAttribute("data-theme");
+
+                        body.setAttribute("data-theme", selectedTheme);
+                        localStorage.setItem("theme", selectedTheme);
+                        updateActiveTheme(selectedTheme);
+                        themeDropdown.classList.remove("show");
+
+                        // Add transition effect
+                        body.style.transition = "all 0.3s ease";
+                        setTimeout(() => {
+                            body.style.transition = "";
+                        }, 300);
+                    });
+                });
+
+                function updateActiveTheme(theme) {
+                    themeOptions.forEach((option) => {
+                        option.classList.remove("active");
+                        if (option.getAttribute("data-theme") === theme) {
+                            option.classList.add("active");
+                        }
+                    });
+                }
             }
 
             // Particle Effects
@@ -1452,16 +1542,108 @@
 
                 sections.forEach((section) => sectionObserver.observe(section));
 
-                // Add some random easter egg positioning
+                // Add some random easter egg positioning (only if easter eggs exist)
                 const easterEggs =
                     document.querySelectorAll(".easter-eggs > div");
-                easterEggs.forEach((egg) => {
-                    egg.style.top = Math.random() * 80 + 10 + "%";
-                    egg.style.left = Math.random() * 90 + 5 + "%";
-                });
+                if (easterEggs.length > 0) {
+                    easterEggs.forEach((egg) => {
+                        egg.style.top = Math.random() * 80 + 10 + "%";
+                        egg.style.left = Math.random() * 90 + 5 + "%";
+                    });
+                }
+
+                // Initialize active navigation highlighting
+                initActiveNavigation();
             });
+
+            // Active Navigation Highlighting
+            function initActiveNavigation() {
+                const navLinks = document.querySelectorAll(".nav-link");
+                const sections = document.querySelectorAll("section[id]");
+
+                if (sections.length === 0) return;
+
+                // Create intersection observer for sections
+                const navObserver = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (
+                                entry.isIntersecting &&
+                                entry.intersectionRatio > 0.5
+                            ) {
+                                const sectionId =
+                                    entry.target.getAttribute("id");
+
+                                // Remove active class from all nav links
+                                navLinks.forEach((link) =>
+                                    link.classList.remove("active")
+                                );
+
+                                // Add active class to current section's nav link
+                                const activeLink = document.querySelector(
+                                    `a[href="#${sectionId}"]`
+                                );
+                                if (
+                                    activeLink &&
+                                    activeLink.classList.contains("nav-link")
+                                ) {
+                                    activeLink.classList.add("active");
+                                }
+                            }
+                        });
+                    },
+                    {
+                        threshold: [0.1, 0.5, 0.7],
+                        rootMargin: "-20% 0px -70% 0px",
+                    }
+                );
+
+                // Observe all sections
+                sections.forEach((section) => navObserver.observe(section));
+
+                // Handle scroll events for better responsiveness
+                let scrollTimer;
+                window.addEventListener("scroll", () => {
+                    clearTimeout(scrollTimer);
+                    scrollTimer = setTimeout(() => {
+                        const scrollPosition =
+                            window.scrollY + window.innerHeight / 3;
+
+                        for (let i = sections.length - 1; i >= 0; i--) {
+                            const section = sections[i];
+                            const sectionTop = section.offsetTop;
+                            const sectionHeight = section.offsetHeight;
+
+                            if (
+                                scrollPosition >= sectionTop &&
+                                scrollPosition < sectionTop + sectionHeight
+                            ) {
+                                const sectionId = section.getAttribute("id");
+
+                                navLinks.forEach((link) =>
+                                    link.classList.remove("active")
+                                );
+
+                                const activeLink = document.querySelector(
+                                    `a[href="#${sectionId}"]`
+                                );
+                                if (
+                                    activeLink &&
+                                    activeLink.classList.contains("nav-link")
+                                ) {
+                                    activeLink.classList.add("active");
+                                }
+                                break;
+                            }
+                        }
+                    }, 10);
+                });
+            }
         </script>
-        <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+        <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+        ></script>
         <script>
             (function () {
                 emailjs.init("3xGPdkWIKgZbgcqum");
@@ -1469,16 +1651,18 @@
 
             function showToast(message, type = "success") {
                 const toast = document.getElementById("toast-message");
-                toast.textContent = message;
-                toast.className = `custom-toast show ${type}`;
-                setTimeout(() => {
-                    toast.className = "custom-toast";
-                }, 3000);
+                if (toast) {
+                    toast.textContent = message;
+                    toast.className = `custom-toast show ${type}`;
+                    setTimeout(() => {
+                        toast.className = "custom-toast";
+                    }, 3000);
+                }
             }
 
-            document
-                .getElementById("contact-form")
-                .addEventListener("submit", function (e) {
+            const contactForm = document.getElementById("contact-form");
+            if (contactForm) {
+                contactForm.addEventListener("submit", function (e) {
                     e.preventDefault();
                     emailjs
                         .sendForm("service_s3mcqlr", "template_5fazbpq", this)
@@ -1488,7 +1672,7 @@
                                     "Message sent successfully!",
                                     "success"
                                 );
-                                document.getElementById("contact-form").reset();
+                                contactForm.reset();
                             },
                             function (error) {
                                 showToast(
@@ -1499,7 +1683,9 @@
                             }
                         );
                 });
+            }
         </script>
+        <link rel="stylesheet" href="ai-animations.css" />
         <script src="ai-assistant.js"></script>
     </body>
 </html>

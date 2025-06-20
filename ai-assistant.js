@@ -1,18 +1,28 @@
 // AI Assistant for One Piece Portfolio
 // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
 
+// AI Assistant Configuration - Easy On/Off Control
+const AI_CONFIG = {
+    enabled: false, // Set to false to disable AI chat functionality
+    showButton: true, // Set to false to hide chat button completely
+};
+
 class PirateAI {
     constructor() {
         this.isOpen = false;
         this.messages = [];
         this.apiKey = null;
+        this.isOnline = AI_CONFIG.enabled;
         this.init();
     }
 
     init() {
+        if (!AI_CONFIG.showButton) return;
+
         this.createChatWidget();
         this.setupEventListeners();
         this.addWelcomeMessage();
+        this.updateOnlineStatus();
     }
 
     createChatWidget() {
@@ -22,7 +32,7 @@ class PirateAI {
         chatButton.innerHTML = `
             <div class="den-den-mushi">
                 🐌
-                <div class="notification-dot"></div>
+                <div class="status-indicator" id="ai-status-indicator"></div>
             </div>
         `;
 
@@ -87,14 +97,12 @@ class PirateAI {
 
     toggleChat() {
         const chatWindow = document.getElementById("pirate-chat-window");
-        const notification = document.querySelector(".notification-dot");
 
         if (this.isOpen) {
             this.closeChat();
         } else {
             chatWindow.classList.add("open");
             this.isOpen = true;
-            notification.style.display = "none";
             document.getElementById("chat-input").focus();
         }
     }
@@ -120,6 +128,18 @@ class PirateAI {
         const message = input.value.trim();
 
         if (!message) return;
+
+        // Check if AI is online
+        if (!this.isOnline) {
+            const offlineMsg = {
+                type: "bot",
+                content:
+                    "Ahoy! The AI assistant is currently offline. Please check back later, matey!",
+                timestamp: new Date(),
+            };
+            this.renderMessage(offlineMsg);
+            return;
+        }
 
         // Add user message
         const userMsg = {
@@ -158,6 +178,24 @@ class PirateAI {
             this.renderMessage(errorMsg);
         } finally {
             this.showLoading(false);
+        }
+    }
+
+    // Update online status and visual indicator
+    updateOnlineStatus() {
+        const statusIndicator = document.getElementById("ai-status-indicator");
+        const chatButton = document.getElementById("pirate-chat-button");
+
+        if (statusIndicator) {
+            statusIndicator.className = `status-indicator ${
+                this.isOnline ? "online" : "offline"
+            }`;
+        }
+
+        if (chatButton) {
+            chatButton.title = this.isOnline
+                ? "AI Assistant (Online)"
+                : "AI Assistant (Offline)";
         }
     }
 
