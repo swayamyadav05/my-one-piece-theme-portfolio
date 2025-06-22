@@ -161,8 +161,7 @@
                                 Join My Crew
                             </a>
                             <a
-                                href="assets/New Updated Resume_Post Internship.pdf"
-                                id="resume-download"
+                                href="assets/Swayam-Yadav-Resume.pdf"
                                 class="btn btn-tertiary"
                                 download="Swayam_Yadav_Resume.pdf"
                             >
@@ -1626,35 +1625,6 @@
                 timelineItems.forEach((item) => observer.observe(item));
             }
 
-            // Resume Download
-            function initResumeDownload() {
-                const resumeBtn = document.getElementById("resume-download");
-                resumeBtn.addEventListener("click", (e) => {
-                    e.preventDefault();
-
-                    // Create a link to download the PDF
-                    const a = document.createElement("a");
-                    a.href = "New Updated Resume_Post Internship.pdf";
-                    a.download = "Swayam_Yadav_Resume.pdf";
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-
-                    // Show success message
-                    const btn = e.target.closest(".btn");
-                    const originalText = btn.innerHTML;
-                    btn.innerHTML = '<i class="fas fa-check"></i> Downloaded!';
-                    btn.style.background = "var(--gold)";
-                    btn.style.color = "var(--dark-bg)";
-
-                    setTimeout(() => {
-                        btn.innerHTML = originalText;
-                        btn.style.background = "";
-                        btn.style.color = "";
-                    }, 2000);
-                });
-            }
-
             // Easter Eggs
             function showEasterEgg() {
                 const messages = [
@@ -1707,7 +1677,6 @@
                 rotateQuotes();
                 parallaxEffect();
                 animateTimeline();
-                initResumeDownload();
 
                 // Add revealed class to elements as they come into view
                 const sections = document.querySelectorAll("section");
