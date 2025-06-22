@@ -831,11 +831,12 @@ h6 {
     align-items: center;
     padding: 8rem 0 2rem;
     z-index: 2;
+    margin: 0 5rem 0 2rem;
 }
 
-.hero-text {
+/* .hero-text {
     margin-left: 2rem;
-}
+} */
 
 .hero-title {
     font-size: clamp(2.5rem, 5vw, 4rem);
@@ -941,7 +942,7 @@ h6 {
 
 .hero-image {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 }
 

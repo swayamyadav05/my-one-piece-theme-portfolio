@@ -13,3 +13,28 @@ Your One Piece portfolio website is complete! Here's what I've built:
 ✓ Fully responsive design for all devices
 
 The site captures the adventurous One Piece spirit while maintaining a professional portfolio structure. How does everything look and feel? Are you ready to set sail with this me?
+
+---
+
+### Project Structure
+
+The project is organized into a clean and maintainable structure:
+
+```
+portfolio/
+├── public/
+│   ├── index.html         # Main HTML file
+│   ├── css/               # Stylesheets
+│   │   ├── styles.css
+│   │   ├── ai-assistant.css
+│   │   └── ai-animations.css
+│   ├── js/                # Client-side JavaScript
+│   │   └── ai-assistant.js
+│   └── assets/            # Images, fonts, and other static assets
+│       ├── favicon.png
+│       └── ...
+├── api/                   # Serverless functions
+├── server.js              # Express server
+├── package.json           # Project dependencies
+└── vercel.json            # Vercel deployment configuration
+```
