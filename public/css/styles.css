@@ -772,12 +772,14 @@ h6 {
         padding: 2rem;
         gap: 1rem;
         transform: translateY(-100vh);
-        transition: transform 0.3s ease;
+        transition: transform 0.3s ease, visibility 0.3s;
         border-top: 2px solid var(--gold);
+        visibility: hidden;
     }
 
     .nav-toggle:checked ~ .nav-menu {
         transform: translateY(0);
+        visibility: visible;
     }
 
     /* Hamburger Animation */
@@ -1572,10 +1574,12 @@ section {
     justify-content: center;
     opacity: 0;
     transition: var(--transition);
+    visibility: hidden;
 }
 
 .project-card:hover .project-overlay {
     opacity: 1;
+    visibility: visible;
 }
 
 .project-card:hover .project-image img {
@@ -2360,7 +2364,7 @@ section {
 
 [data-theme="light"] .custom-toast.success {
     background: linear-gradient(45deg, var(--navy), var(--gold));
-    color: var(--white);
+    color: var(--dark-bg);
 }
 
 [data-theme="light"] .custom-toast.error {
