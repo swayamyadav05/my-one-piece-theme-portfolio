@@ -833,7 +833,7 @@ h6 {
     align-items: center;
     padding: 8rem 0 2rem;
     z-index: 2;
-    margin: 0 5rem 0 2rem;
+    margin: 0 5rem 0 4rem;
 }
 
 /* .hero-text {
@@ -1931,6 +1931,7 @@ section {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 2rem;
+        margin: 0 2rem 0 2rem;
     }
 
     .about-content {
@@ -1960,6 +1961,10 @@ section {
 
     .hero-content {
         padding: 6rem 0 2rem;
+    }
+
+    .hero-image {
+        justify-content: center;
     }
 
     .character-frame {
